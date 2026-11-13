@@ -1,4 +1,10 @@
 import type { ClothingProduct } from "../data/data";
+import type { ProductInfo } from "./ClothingApp";
+
+interface ItemsCardProps extends ClothingProduct {
+  productInfo: ProductInfo;
+  handleChangeQuantity: (delta: number) => void;
+}
 
 export default function ItemCard({
   name,
@@ -9,9 +15,9 @@ export default function ItemCard({
   description,
   size,
   price,
-  quantity,
-  itemQuantity,
-}: ClothingProduct) {
+  productInfo,
+  handleChangeQuantity,
+}: ItemsCardProps) {
   return (
     <div>
       <h2>{name}</h2>
@@ -35,15 +41,15 @@ export default function ItemCard({
       </p>
       <p>
         <b>Price: </b>
-        {price}
+        {price.toFixed(2)}$
       </p>
       <p>
         <b>Quantity: </b>
-        {quantity}
+        {productInfo.quantity}
       </p>
-      <button>{" - "}</button>
-      <span>{itemQuantity}</span>
-      <button>{" + "}</button>
+      <button onClick={() => handleChangeQuantity(-1)}>{" - "}</button>
+      <span>{productInfo.itemQuantity}</span>
+      <button onClick={() => handleChangeQuantity(1)}>{" + "}</button>
       <br />
       <button>Add to Checkout</button>
     </div>
