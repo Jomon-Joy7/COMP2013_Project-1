@@ -9,9 +9,10 @@ export default function ItemsContainer({
   data,
   productInfo,
   handleChangeQuantity,
+  handleAddToCheckout,
 }: ItemsContainerProps) {
   return (
-    <div>
+    <div className="ItemsContainer">
       {data.map((product) => {
         const info = productInfo.find(
           (information) => information.id === product.id,
@@ -25,6 +26,7 @@ export default function ItemsContainer({
             handleChangeQuantity={(delta: number) =>
               handleChangeQuantity(product.id, delta)
             }
+            handleAddToCheckout={handleAddToCheckout}
           />
         );
       })}
